@@ -85,7 +85,7 @@ void B1RunAction::BeginOfRunAction(const G4Run*)
   G4AccumulableManager* accumulableManager = G4AccumulableManager::Instance();
   accumulableManager->Reset();
 
-  myFile = new TFile("/Users/brash/Rutherford/output.root","RECREATE","myFile",1);
+  myFile = new TFile("~/Rutherford/output.root","RECREATE","myFile",1);
   myTree = new TTree("tree","Tree for storing Geant4 data");
   myTree->SetAutoSave();
 
