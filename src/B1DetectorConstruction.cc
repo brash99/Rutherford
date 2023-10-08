@@ -80,7 +80,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // Define the geometry of the scintillator
   G4double scintX = 1*cm;
   G4double scintY = 1*cm;
-  G4double scintZ = 1*mm;
+  G4double scintZ = 1*cm;
   G4Box* ScintillatorBox = new G4Box("ScintillatorBox", scintX/2, scintY/2, scintZ/2);
 
   G4LogicalVolume* ScintillatorLog = new G4LogicalVolume(ScintillatorBox, ScintillatorMaterial, "ScintillatorLog");
