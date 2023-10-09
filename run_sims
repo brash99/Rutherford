@@ -1,0 +1,19 @@
+#!/bin/bash
+
+export homedir=/Users/brash/Rutherford
+export MCMACRO=$homedir/vis2_notracks_loop.mac
+
+
+for i in 1 2 4 6 8 12 16 20 24 28 32
+do
+    echo "Looping ... number of foils = $i"
+    echo "/control/macroPath $homedir" > $MCMACRO
+    echo "/Rutherford/detector/NumberOfFoils $i" >> $MCMACRO
+    echo "/Rutherford/detector/FoilThickness 0.000065" >> $MCMACRO
+    echo "/run/initialize" >> $MCMACRO
+    echo "/run/beamOn 1000000" >>   $MCMACRO
+
+    Rutherford $MCMACRO
+    cp output.root "rootfiles/output_geiger_$i"foils.root
+  
+done
