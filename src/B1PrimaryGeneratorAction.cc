@@ -65,7 +65,7 @@ B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
   G4ParticleDefinition* particle
     = particleTable->FindParticle(particleName="alpha");
   fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.5,0.,-0.866025));
   fParticleGun->SetParticleEnergy(5.8*MeV);
 }
 
@@ -111,9 +111,9 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
 
   G4double size = 0.05; 
-  G4double x0 = size * envSizeXY * (G4UniformRand()-0.5);
+  G4double x0 = -0.45*cm + size * envSizeXY * (G4UniformRand()-0.5);
   G4double y0 = size * envSizeXY * (G4UniformRand()-0.5);
-  G4double z0 = -0.00015 * cm;
+  G4double z0 = 0.8 * cm;
   
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
 

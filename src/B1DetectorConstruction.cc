@@ -149,73 +149,21 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   //
 
   G4Material* gold = nist->FindOrBuildMaterial("G4_Au");
-  G4double goldThickness = 0.00012;
-  G4Box* solidGold = new G4Box("Gold", 1.5*cm, 1.5*cm, goldThickness*cm);
+  G4double goldThickness = 0.000065;
+  G4Box* solidGold = new G4Box("Gold", 0.5*cm, 0.5*cm, goldThickness*cm/2.0);
+    
+
+  G4int nfoils = 52;
+
   G4LogicalVolume* logicGold = new G4LogicalVolume(solidGold, gold, "Gold");
-  new G4PVPlacement(0, G4ThreeVector(0, 0, 0), logicGold, "Gold", logicEnv, false, 0, checkOverlaps);
+  for (int i = 0; i<nfoils; i++){
 
+        new G4PVPlacement(0, G4ThreeVector(0, 0, goldThickness*i), logicGold, "Gold", logicEnv, false, i, checkOverlaps);
+  
+  }
  
-  //     
-  // Shape 1
-  //  
-  //G4Material* shape1_mat = nist->FindOrBuildMaterial("G4_A-150_TISSUE");
-  //G4ThreeVector pos1 = G4ThreeVector(0, 2*cm, -7*cm);
-        
-  // Conical section shape       
-  //G4double shape1_rmina =  0.*cm, shape1_rmaxa = 2.*cm;
-  //G4double shape1_rminb =  0.*cm, shape1_rmaxb = 4.*cm;
-  //G4double shape1_hz = 3.*cm;
-  //G4double shape1_phimin = 0.*deg, shape1_phimax = 360.*deg;
-  //G4Cons* solidShape1 =    
-  //  new G4Cons("Shape1", 
-  //  shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-  //  shape1_phimin, shape1_phimax);
-  //                    
-  //G4LogicalVolume* logicShape1 =                         
-  //  new G4LogicalVolume(solidShape1,         //its solid
-  //                      shape1_mat,          //its material
-  //                      "Shape1");           //its name
-  //             
-  //new G4PVPlacement(0,                       //no rotation
-  //                  pos1,                    //at position
-  //                  logicShape1,             //its logical volume
-  //                  "Shape1",                //its name
-  //                  logicEnv,                //its mother  volume
-  //                  false,                   //no boolean operation
-  //                  0,                       //copy number
-  //                  checkOverlaps);          //overlaps checking
-
-  //     
-  // Shape 2
-  //
-  //G4Material* shape2_mat = nist->FindOrBuildMaterial("G4_BONE_COMPACT_ICRU");
-  //G4ThreeVector pos2 = G4ThreeVector(0, -1*cm, 7*cm);
-
-  // Trapezoid shape       
-  //G4double shape2_dxa = 12*cm, shape2_dxb = 12*cm;
-  //G4double shape2_dya = 10*cm, shape2_dyb = 16*cm;
-  //G4double shape2_dz  = 6*cm;      
-  //G4Trd* solidShape2 =    
-  // new G4Trd("Shape2",                      //its name
-  //            0.5*shape2_dxa, 0.5*shape2_dxb, 
-  //            0.5*shape2_dya, 0.5*shape2_dyb, 0.5*shape2_dz); //its size
-  //              
-  //G4LogicalVolume* logicShape2 =                         
-  //new G4LogicalVolume(solidShape2,         //its solid
-  //                      shape2_mat,          //its material
-  //                      "Shape2");           //its name
-  //             
-  //new G4PVPlacement(0,                       //no rotation
-  //                  pos2,                    //at position
-  //                  logicShape2,             //its logical volume
-  //                  "Shape2",                //its name
-  //                  logicEnv,                //its mother  volume
-  //                  false,                   //no boolean operation
-  //                  0,                       //copy number
-  //                  checkOverlaps);          //overlaps checking
-
-  G4double distance = 3*cm;
-  G4double rotationAngle = 20*deg;
+  G4double distance = 0.7*cm;
+  G4double rotationAngle = -90*deg;
   G4double zposition = distance*cos(rotationAngle);
   G4double xposition = -distance*sin(rotationAngle);
 
@@ -223,7 +171,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   rotationMatrix->rotateY(rotationAngle);
 
 
-  G4ThreeVector pos_scint = G4ThreeVector(xposition, 0*cm, zposition);
+  G4ThreeVector pos_scint = G4ThreeVector(xposition+0.5*cm, 0*cm, zposition+0.7*cm);
   
   new G4PVPlacement(rotationMatrix,           // rotation around y axis
                   pos_scint,                  // at position calculated above
