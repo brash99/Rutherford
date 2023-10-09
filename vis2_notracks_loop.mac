@@ -1,5 +1,5 @@
 /control/macroPath /Users/brash/Rutherford
-/Rutherford/detector/NumberOfFoils 4
+/Rutherford/detector/NumberOfFoils 32
 /Rutherford/detector/FoilThickness 0.000065
 /run/initialize
 /run/beamOn 1000000
