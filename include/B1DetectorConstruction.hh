@@ -35,6 +35,7 @@
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
+class B1DetectorMessenger;
 
 /// Detector construction class to define materials and geometry.
 
@@ -48,6 +49,18 @@ class B1DetectorConstruction : public G4VUserDetectorConstruction
     void ConstructSDandField();
     
     G4LogicalVolume* GetScoringVolume() const { return fScoringVolume; }
+
+    void UpdateGeometry();
+
+    inline void SetNumberOfFoils(G4int n) { fNumberOfFoils = n; }
+    inline void SetFoilThickness(G4double t) { fFoilThickness = t; }
+
+  private:
+  
+    B1DetectorMessenger* fDetMessenger;
+
+    G4int fNumberOfFoils;
+    G4double fFoilThickness;
 
   protected:
     G4LogicalVolume*  fScoringVolume;

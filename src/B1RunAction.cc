@@ -29,6 +29,7 @@
 
 #include "B1RunAction.hh"
 #include "B1PrimaryGeneratorAction.hh"
+#include "B1DetectorMessenger.hh"
 #include "B1DetectorConstruction.hh"
 // #include "B1Run.hh"
 

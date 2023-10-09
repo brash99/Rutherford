@@ -28,6 +28,7 @@
 /// \brief Implementation of the B1DetectorConstruction class
 
 #include "B1DetectorConstruction.hh"
+#include "B1DetectorMessenger.hh"
 #include "ScintillatorSD.hh"
 #include "G4SDManager.hh"
 
@@ -47,7 +48,13 @@
 B1DetectorConstruction::B1DetectorConstruction()
 : G4VUserDetectorConstruction(),
   fScoringVolume(0)
-{ }
+{ 
+
+    fDetMessenger = new B1DetectorMessenger(this);
+    fNumberOfFoils = 1;
+    fFoilThickness = 0.000065*cm;
+
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -149,12 +156,31 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   //
 
   G4Material* gold = nist->FindOrBuildMaterial("G4_Au");
-  G4double goldThickness = 0.000065;
+  
+  G4double goldThickness = fFoilThickness;
+  //G4double goldThickness = 0.000065;
   //G4double goldThickness = 0.00000065;
+  
   G4Box* solidGold = new G4Box("Gold", 0.5*cm, 0.5*cm, goldThickness*cm/2.0);
     
 
-  G4int nfoils = 40;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+
+  std::cout << "Gold thickness: " << fFoilThickness << std::endl;
+  std::cout << "Number of foils: " << fNumberOfFoils << std::endl;
+
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  std::cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << std::endl;
+  
+  G4int nfoils = fNumberOfFoils;
+
 
   G4LogicalVolume* logicGold = new G4LogicalVolume(solidGold, gold, "Gold");
   for (int i = 0; i<nfoils; i++){

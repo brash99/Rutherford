@@ -2,6 +2,8 @@
 # Set physics models and interaction opitons
 ##################################################################
 
+/Rutherford/detector/NumberOfFoils 10
+/Rutherford/detector/FoilThickness 0.000065
 /run/initialize
 
 ##################################################################
