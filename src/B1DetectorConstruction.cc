@@ -150,10 +150,11 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
   G4Material* gold = nist->FindOrBuildMaterial("G4_Au");
   G4double goldThickness = 0.000065;
+  //G4double goldThickness = 0.00000065;
   G4Box* solidGold = new G4Box("Gold", 0.5*cm, 0.5*cm, goldThickness*cm/2.0);
     
 
-  G4int nfoils = 52;
+  G4int nfoils = 40;
 
   G4LogicalVolume* logicGold = new G4LogicalVolume(solidGold, gold, "Gold");
   for (int i = 0; i<nfoils; i++){
